@@ -10,3 +10,11 @@ export function getInterlocutorNickname(conversation: Conversation, userId: User
 export function sortByMostRecent(conversations: Conversation[]) {
   return [...conversations].sort((a, b) => b.lastMessageTimestamp - a.lastMessageTimestamp)
 }
+
+// The conversation between two users, whoever started it
+export function findConversationWith(conversations: Conversation[], userId: User['id'], otherUserId: User['id']) {
+  return conversations.find(
+    ({ senderId, recipientId }) =>
+      (senderId === userId && recipientId === otherUserId) || (senderId === otherUserId && recipientId === userId),
+  )
+}

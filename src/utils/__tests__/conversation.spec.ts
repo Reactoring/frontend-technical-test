@@ -1,4 +1,4 @@
-import { getInterlocutorNickname, sortByMostRecent } from '../conversation'
+import { findConversationWith, getInterlocutorNickname, sortByMostRecent } from '../conversation'
 
 const conversation = {
   id: 1,
@@ -26,5 +26,16 @@ describe('sortByMostRecent', () => {
 
     expect(sortByMostRecent(conversations)).toEqual([conversation, older])
     expect(conversations).toEqual([older, conversation])
+  })
+})
+
+describe('findConversationWith', () => {
+  it('should find the conversation whoever started it', () => {
+    expect(findConversationWith([conversation], 1, 2)).toBe(conversation)
+    expect(findConversationWith([conversation], 2, 1)).toBe(conversation)
+  })
+
+  it('should return undefined when the users have no conversation', () => {
+    expect(findConversationWith([conversation], 1, 3)).toBeUndefined()
   })
 })
