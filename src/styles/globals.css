@@ -3,6 +3,7 @@
   /* Darker orange for text and buttons: the brand orange is below the 4.5:1 WCAG contrast on white */
   --color-primary: #c2410c;
   --color-primary-soft: #fdeee6;
+  --color-error: #b42318;
   --color-text: #1a1a1a;
   --color-text-muted: #595959;
   --color-background: #f6f6f7;

@@ -1,3 +1,21 @@
+/* Fixed height below the app header: the header and the form stay visible, only the messages scroll.
+   The negative margin lets the form reach the bottom edge, over the padding of <main> */
+.detail {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--header-height) - 24px);
+  margin-bottom: -24px;
+}
+
+/* Takes the remaining height: the message list scrolls inside */
+.messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* Lets the area shrink below its content instead of growing */
+  min-height: 0;
+}
+
 .link {
   color: var(--color-primary);
   font-weight: 600;

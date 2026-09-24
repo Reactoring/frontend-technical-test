@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { useRouter, type NextRouter } from 'next/router'
 import { LoggedUserProvider } from '../contexts/LoggedUserContext'
 import ConversationPage from '../pages/conversations/[id]'
@@ -70,5 +70,60 @@ describe('Conversation page', () => {
 
     expect(await screen.findByText("Aucun message pour l'instant")).toBeInTheDocument()
     expect(screen.getByText('Envoyez le premier message à Jeremie.')).toBeInTheDocument()
+  })
+})
+
+describe('Message form', () => {
+  const sendMessage = async (text: string) => {
+    const field = await screen.findByRole('textbox', { name: 'Votre message' })
+    fireEvent.change(field, { target: { value: text } })
+    fireEvent.click(screen.getByRole('button', { name: 'Envoyer' }))
+    return field
+  }
+
+  it('should send the message, clear the field and reload the messages', async () => {
+    openConversation('1')
+    const newMessage = { id: 3, conversationId: 1, authorId: 1, timestamp: 1625650000, body: 'Tu es dispo ?' }
+    apiRequestMock
+      .mockResolvedValueOnce(conversations)
+      .mockResolvedValueOnce(messages)
+      .mockResolvedValueOnce({ id: 3 })
+      .mockResolvedValueOnce([...messages, newMessage])
+
+    render(<ConversationPage />, { wrapper })
+    const field = await sendMessage('  Tu es dispo ?  ')
+
+    expect(await screen.findByText('Tu es dispo ?')).toBeInTheDocument()
+    expect(field).toHaveValue('')
+    expect(apiRequestMock).toHaveBeenCalledWith('/messages/1', {
+      method: 'POST',
+      body: { conversationId: 1, authorId: 1, timestamp: expect.any(Number), body: 'Tu es dispo ?' },
+      schema: expect.anything(),
+    })
+  })
+
+  it('should not send an empty message', async () => {
+    openConversation('1')
+    apiRequestMock.mockResolvedValueOnce(conversations).mockResolvedValueOnce(messages)
+
+    render(<ConversationPage />, { wrapper })
+    await screen.findByText('Bonjour Jeremie')
+    await sendMessage('   ')
+
+    expect(apiRequestMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('should keep the text and show an error when the message cannot be sent', async () => {
+    openConversation('1')
+    apiRequestMock
+      .mockResolvedValueOnce(conversations)
+      .mockResolvedValueOnce(messages)
+      .mockRejectedValueOnce(new Error('Server unreachable'))
+
+    render(<ConversationPage />, { wrapper })
+    const field = await sendMessage('Tu es dispo ?')
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Votre message n'a pas pu être envoyé. Réessayez.")
+    expect(field).toHaveValue('Tu es dispo ?')
   })
 })

@@ -25,6 +25,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 
 - Conversation list, most recent first
 - Conversation messages, oldest first
+- Send a message (Enter to send, Shift + Enter for a new line), the field is kept if sending fails
 
 ## Technical choices
 
@@ -62,3 +63,7 @@ The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a t
 `next@15.2.2` had known vulnerabilities, including a critical one ([CVE-2025-29927](https://github.com/advisories/GHSA-f82v-jwr5-mffw)). Upgraded to the latest 15.x, removed the redundant `sharp` dependency and overrode the `postcss` version bundled by Next: `npm audit` goes from 26 vulnerabilities to 0. Next 16 is a major version and would need its own validated migration.
 
 `GET /conversation/:id` always returns `[]` (the json-server middleware intercepts it), so a conversation is read from the user's conversation list: an id outside this list shows "not found" and its messages are never loaded. This is only a client-side guard, the API must enforce it. Message bodies are rendered as text, never as HTML.
+
+## Known limitations
+
+- The json-server does not update `lastMessageTimestamp` when a message is sent, so the conversation date and order stay unchanged after sending.

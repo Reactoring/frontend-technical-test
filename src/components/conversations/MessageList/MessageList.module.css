@@ -2,9 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 0;
   margin: 0;
-  padding: 0;
+  /* Room for the bubble shadows */
+  padding: 4px;
+  overflow-y: auto;
   list-style: none;
+  /* Thin and discreet, without the arrow buttons */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0 0 0 / 20%) transparent;
 }
 
 .mine,

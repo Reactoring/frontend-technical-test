@@ -12,4 +12,8 @@ export const fr = {
   'messages.empty': "Aucun message pour l'instant",
   'messages.emptyHint': 'Envoyez le premier message à {name}.',
   'messages.error': 'Impossible de charger les messages.',
+  'messageForm.label': 'Votre message',
+  'messageForm.placeholder': 'Écrire un message…',
+  'messageForm.send': 'Envoyer',
+  'messageForm.error': "Votre message n'a pas pu être envoyé. Réessayez.",
 }

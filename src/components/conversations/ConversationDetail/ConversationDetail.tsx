@@ -6,6 +6,7 @@ import { queries } from '../../../services/endpoints'
 import { getInterlocutorNickname } from '../../../utils/conversation'
 import { ConversationHeader } from '../ConversationHeader/ConversationHeader'
 import { ConversationMessages } from '../ConversationMessages/ConversationMessages'
+import { MessageForm } from '../MessageForm/MessageForm'
 import styles from './ConversationDetail.module.css'
 
 export function ConversationDetail({ conversationId }: { conversationId: number }) {
@@ -32,16 +33,19 @@ export function ConversationDetail({ conversationId }: { conversationId: number 
   const interlocutorNickname = getInterlocutorNickname(conversation, userId)
 
   return (
-    <>
+    <div className={styles.detail}>
       <ConversationHeader
         interlocutorNickname={interlocutorNickname}
         lastMessageTimestamp={conversation.lastMessageTimestamp}
       />
-      <ConversationMessages
-        conversationId={conversation.id}
-        userId={userId}
-        interlocutorNickname={interlocutorNickname}
-      />
-    </>
+      <div className={styles.messages}>
+        <ConversationMessages
+          conversationId={conversation.id}
+          userId={userId}
+          interlocutorNickname={interlocutorNickname}
+        />
+      </div>
+      <MessageForm conversationId={conversation.id} userId={userId} />
+    </div>
   )
 }

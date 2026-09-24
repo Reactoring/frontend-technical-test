@@ -1,0 +1,65 @@
+.form {
+  padding: 12px 0 16px;
+}
+
+.field {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 6px 6px 6px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.field:focus-within {
+  border-color: var(--color-primary);
+}
+
+.input {
+  flex: 1;
+  /* Grows with the text where supported */
+  field-sizing: content;
+  max-height: 160px;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  resize: none;
+}
+
+.send {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+.send:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.send path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.error {
+  margin: 8px 0 0;
+  padding: 0 20px;
+  color: var(--color-error);
+  font-size: 0.875rem;
+}
