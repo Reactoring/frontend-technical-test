@@ -10,6 +10,8 @@ npm run start-server   # API on http://localhost:3005
 npm run dev            # app on http://localhost:3000
 ```
 
+The API URL can be changed with `NEXT_PUBLIC_API_URL` (see `.env.example`).
+
 | Script              | Description                       |
 | ------------------- | --------------------------------- |
 | `npm test`          | Unit and integration tests        |
@@ -23,6 +25,10 @@ The CI runs lint, typecheck and tests on every push and pull request.
 ### Tooling
 
 - **Type checking in CI**: `next build` ignores ESLint and tests don't check types, so a dedicated `typecheck` step catches type errors before they reach `main`.
+
+### Data layer
+
+All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas.
 
 ### Security
 
