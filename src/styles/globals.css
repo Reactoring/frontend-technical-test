@@ -28,6 +28,11 @@ body {
   background: radial-gradient(1200px 400px at 50% -200px, rgb(236 90 19 / 12%), transparent), var(--color-background);
 }
 
+h1 {
+  margin: 0 0 16px;
+  font-size: 1.75rem;
+}
+
 a {
   color: inherit;
   text-decoration: none;
