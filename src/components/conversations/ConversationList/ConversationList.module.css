@@ -7,20 +7,19 @@
 }
 
 .item {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   align-items: center;
-  column-gap: 16px;
+  gap: 16px;
   padding: 16px 20px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: border-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .item:hover {
-  border-color: var(--color-primary);
+  background: #fff8f4;
 }
 
 .item:focus-visible {
@@ -28,18 +27,9 @@
   outline-offset: 2px;
 }
 
-.avatar {
-  grid-row: span 2;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-transform: uppercase;
+.text {
+  display: flex;
+  flex-direction: column;
 }
 
 .nickname {

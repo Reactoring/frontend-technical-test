@@ -5,4 +5,11 @@ export const fr = {
   'conversations.title': 'Mes conversations',
   'conversations.empty': 'Aucune conversation pour le moment.',
   'conversations.error': 'Impossible de charger vos conversations.',
+  'conversation.back': 'Retour à mes conversations',
+  'conversation.lastMessage': 'Dernier message :',
+  'conversation.notFound': 'Conversation introuvable.',
+  'conversation.error': 'Impossible de charger cette conversation.',
+  'messages.empty': "Aucun message pour l'instant",
+  'messages.emptyHint': 'Envoyez le premier message à {name}.',
+  'messages.error': 'Impossible de charger les messages.',
 }

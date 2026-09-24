@@ -1,0 +1,50 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mine,
+.theirs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mine {
+  align-items: flex-end;
+}
+
+.theirs {
+  align-items: flex-start;
+}
+
+.author {
+  padding: 0 16px;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.bubble {
+  max-width: 75%;
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 20px;
+  /* Keep the line breaks of the message and wrap long words */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.mine .bubble {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.theirs .bubble {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+}

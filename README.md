@@ -24,6 +24,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 ## Features
 
 - Conversation list, most recent first
+- Conversation messages, oldest first
 
 ## Technical choices
 
@@ -36,6 +37,14 @@ Kept the Pages Router provided by the boilerplate. Messaging is private and high
 - **Type checking in CI**: `next build` ignores ESLint and tests don't check types, so a dedicated `typecheck` step catches type errors before they reach `main`.
 - **Prettier** formats the code (`npm run format`); ESLint only checks code quality (`eslint-config-prettier` disables the conflicting rules).
 
+### Project structure
+
+- `pages`: routing only.
+- `components/ui`: generic components driven by props (no data, no business logic).
+- `components/layout`: the app shell.
+- `components/conversations`: business components; some fetch data and handle loading, error and empty states, the others only render props.
+- `utils`: pure functions, grouped by data type.
+
 ### Data layer
 
 All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas. The endpoints the app may call are declared once in `src/services/endpoints.ts` (path, method, zod input and output). Components use them through `useTypedQuery` / `useTypedMutation` (TanStack Query), so params and results are typed and mutation inputs are validated before being sent. The swagger is outdated (wrong types, missing fields), so this contract is written by hand instead of being generated.
@@ -46,8 +55,10 @@ The logged user id is provided by a React context (`useLoggedUserId()`), so comp
 
 ### Internationalisation
 
-The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a typed `t('key')` function (an unknown key is a compile error). Adding a language means adding a dictionary with the same keys.
+The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a typed `t('key', params)` function (an unknown key is a compile error, `{name}` placeholders are replaced by params). Adding a language means adding a dictionary with the same keys.
 
 ### Security
 
 `next@15.2.2` had known vulnerabilities, including a critical one ([CVE-2025-29927](https://github.com/advisories/GHSA-f82v-jwr5-mffw)). Upgraded to the latest 15.x, removed the redundant `sharp` dependency and overrode the `postcss` version bundled by Next: `npm audit` goes from 26 vulnerabilities to 0. Next 16 is a major version and would need its own validated migration.
+
+`GET /conversation/:id` always returns `[]` (the json-server middleware intercepts it), so a conversation is read from the user's conversation list: an id outside this list shows "not found" and its messages are never loaded. This is only a client-side guard, the API must enforce it. Message bodies are rendered as text, never as HTML.

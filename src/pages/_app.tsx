@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Layout } from '../components/Layout/Layout'
+import { Layout } from '../components/layout/Layout/Layout'
 import { LoggedUserProvider } from '../contexts/LoggedUserContext'
 import { getLoggedUserId } from '../utils/getLoggedUserId'
 import '@fontsource-variable/mona-sans'
