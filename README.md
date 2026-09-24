@@ -1,3 +1,31 @@
+# Frontend technical test
+
+## Getting started
+
+Requirements: Node.js 22 (see `.nvmrc`).
+
+```bash
+npm install
+npm run start-server   # API on http://localhost:3005
+npm run dev            # app on http://localhost:3000
+```
+
+| Script              | Description                       |
+| ------------------- | --------------------------------- |
+| `npm test`          | Unit and integration tests        |
+| `npm run lint`      | ESLint                            |
+| `npm run typecheck` | TypeScript check (`tsc --noEmit`) |
+
+The CI runs lint, typecheck and tests on every push and pull request.
+
+## Technical choices
+
+### Tooling
+
+- **Type checking in CI**: `next build` ignores ESLint and tests don't check types, so a dedicated `typecheck` step catches type errors before they reach `main`.
+
+---
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
