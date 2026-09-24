@@ -57,7 +57,7 @@ export function MessageForm({ conversationId, userId }: MessageFormProps) {
           onChange={(event) => setBody(event.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <button type="submit" className={styles.send} aria-label={t('messageForm.send')}>
+        <button type="submit" className={styles.send} aria-label={t('messageForm.send')} disabled={!body.trim()}>
           <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M22 2 11 13M22 2l-7 20-4-9-9-4z" />
           </svg>

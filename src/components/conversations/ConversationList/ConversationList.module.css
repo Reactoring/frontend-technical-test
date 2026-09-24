@@ -1,5 +1,7 @@
+/* Flex rather than grid: a grid column would grow to fit a long nickname */
 .list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   margin: 0;
   padding: 0;
@@ -27,13 +29,18 @@
   outline-offset: 2px;
 }
 
+/* Lets a long nickname be cut instead of overflowing */
 .text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .nickname {
+  overflow: hidden;
   font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .date {

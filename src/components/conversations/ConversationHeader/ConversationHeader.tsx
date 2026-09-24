@@ -12,7 +12,7 @@ export function ConversationHeader({ interlocutorNickname, lastMessageTimestamp 
   return (
     <header className={styles.header}>
       <BackLink href="/" label={t('conversation.back')} />
-      <div>
+      <div className={styles.text}>
         <h1 className={styles.title}>{interlocutorNickname}</h1>
         <p className={styles.lastMessage}>
           {t('conversation.lastMessage')} {formatDate(lastMessageTimestamp)}

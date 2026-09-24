@@ -102,7 +102,7 @@ describe('Message form', () => {
     })
   })
 
-  it('should not send an empty message', async () => {
+  it('should disable the send button and not send an empty message', async () => {
     openConversation('1')
     apiRequestMock.mockResolvedValueOnce(conversations).mockResolvedValueOnce(messages)
 
@@ -110,6 +110,7 @@ describe('Message form', () => {
     await screen.findByText('Bonjour Jeremie')
     await sendMessage('   ')
 
+    expect(screen.getByRole('button', { name: 'Envoyer' })).toBeDisabled()
     expect(apiRequestMock).toHaveBeenCalledTimes(2)
   })
 

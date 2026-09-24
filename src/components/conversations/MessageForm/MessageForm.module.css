@@ -11,10 +11,17 @@
   border: 1px solid var(--color-border);
   border-radius: 28px;
   box-shadow: var(--shadow);
+  transition:
+    padding 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
+/* The field opens up and lifts while writing (also the keyboard focus indicator) */
 .field:focus-within {
-  border-color: var(--color-primary);
+  padding: 10px 8px 10px 24px;
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 5%),
+    0 12px 32px rgb(0 0 0 / 10%);
 }
 
 .input {
@@ -42,6 +49,19 @@
   background: var(--color-primary);
   color: #fff;
   cursor: pointer;
+  /* Small bounce when the button becomes available */
+  transition:
+    background-color 0.25s,
+    color 0.25s,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Nothing to send yet */
+.send:disabled {
+  background: #e4e4e7;
+  color: #a1a1aa;
+  cursor: default;
+  transform: scale(0.9);
 }
 
 .send:focus-visible {
@@ -62,4 +82,11 @@
   padding: 0 20px;
   color: var(--color-error);
   font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field,
+  .send {
+    transition: none;
+  }
 }
