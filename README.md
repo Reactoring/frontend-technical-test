@@ -1,5 +1,21 @@
 # Frontend technical test
 
+## AI-assisted development
+
+This test was developed with AI assistance, mainly to generate the code and the styling.
+
+- **Code**: all the code was reviewed. The CSS a bit less, but I already caught style regressions and had them fixed.
+- **Unit tests**: most generated tests were not reviewed in depth because of the time limit. In my opinion, a good AI-generated test is still better than no test.
+
+What I did:
+
+- Brainstormed the plan with the AI, then reordered the features following a natural progression and the requirements.
+- Enforced the architecture: UI and layout separated from the business modules, components split out instead of piled into the pages.
+- Made the technical choices: TanStack Query, a React context for the logged user id, Prettier, vulnerability checks.
+- Worked step by step, with a review before coding and another before each commit, and a strict code review.
+- Described the UI I wanted and asked for changes, checked the UX and requested corrections.
+- Paid attention to UX and UI edge cases from the start, and ran targeted manual tests.
+
 ## Getting started
 
 Requirements: Node.js 22 (see `.nvmrc`).
