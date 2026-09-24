@@ -90,4 +90,5 @@ The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a t
 
 ## Known limitations
 
+- The mock server middleware read `db.json` once at startup, so created conversations never showed up: it now reads json-server's live database.
 - The json-server does not update `lastMessageTimestamp` when a message is sent, so the conversation date and order stay unchanged after sending.
