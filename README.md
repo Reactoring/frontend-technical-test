@@ -42,6 +42,8 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 - Conversation list, most recent first
 - Conversation messages, oldest first
 - Send a message (Enter to send, Shift + Enter for a new line), the field is kept if sending fails
+- Server errors: a friendly error screen with a retry button
+- Loading skeletons with the same layout as the content
 
 ## Technical choices
 
@@ -65,6 +67,10 @@ Kept the Pages Router provided by the boilerplate. Messaging is private and high
 ### Data layer
 
 All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas. The endpoints the app may call are declared once in `src/services/endpoints.ts` (path, method, zod input and output). Components use them through `useTypedQuery` / `useTypedMutation` (TanStack Query), so params and results are typed and mutation inputs are validated before being sent. The swagger is outdated (wrong types, missing fields), so this contract is written by hand instead of being generated.
+
+### Server errors
+
+Requests are retried twice before showing the error screen, and data already loaded stays visible if a refresh fails. Sending a message is never retried automatically, so a message can't be sent twice.
 
 ### Logged user
 

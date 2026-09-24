@@ -9,7 +9,7 @@ import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   // One client per app instance, so the cache is never shared between server renders
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: 2 } } }))
 
   return (
     <QueryClientProvider client={queryClient}>

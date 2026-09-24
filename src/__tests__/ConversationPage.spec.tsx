@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { useRouter, type NextRouter } from 'next/router'
 import { LoggedUserProvider } from '../contexts/LoggedUserContext'
 import ConversationPage from '../pages/conversations/[id]'
@@ -126,5 +126,21 @@ describe('Message form', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent("Votre message n'a pas pu être envoyé. Réessayez.")
     expect(field).toHaveValue('Tu es dispo ?')
+  })
+
+  it('should keep the messages visible when reloading them fails', async () => {
+    openConversation('1')
+    apiRequestMock
+      .mockResolvedValueOnce(conversations)
+      .mockResolvedValueOnce(messages)
+      .mockResolvedValueOnce({ id: 3 })
+      .mockRejectedValueOnce(new Error('Server unreachable'))
+
+    render(<ConversationPage />, { wrapper })
+    await sendMessage('Tu es dispo ?')
+
+    await waitFor(() => expect(apiRequestMock).toHaveBeenCalledTimes(4))
+    expect(screen.getByText('Bonjour Jeremie')).toBeInTheDocument()
+    expect(screen.queryByText('Le serveur fait une sieste')).not.toBeInTheDocument()
   })
 })

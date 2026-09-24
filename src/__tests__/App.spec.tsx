@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { LoggedUserProvider } from '../contexts/LoggedUserContext'
 import Home from '../pages'
 import { apiRequest } from '../services/apiClient'
@@ -59,11 +59,15 @@ describe('Conversations page', () => {
     expect(await screen.findByText('Aucune conversation pour le moment.')).toBeInTheDocument()
   })
 
-  it('should show an error when the conversations cannot be loaded', async () => {
-    apiRequestMock.mockRejectedValue(new Error('Server unreachable'))
+  it('should show an error when the server is down and load the conversations on retry', async () => {
+    apiRequestMock.mockRejectedValueOnce(new Error('Server unreachable')).mockResolvedValueOnce(conversations)
 
     render(<Home />, { wrapper })
 
-    expect(await screen.findByRole('alert')).toHaveTextContent('Impossible de charger vos conversations.')
+    expect(await screen.findByRole('alert')).toHaveTextContent('Le serveur fait une sieste')
+    fireEvent.click(screen.getByRole('button', { name: 'Réessayer' }))
+
+    expect(await screen.findByText('Patrick')).toBeInTheDocument()
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 })

@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router'
 import { ConversationDetail } from '../../components/conversations/ConversationDetail/ConversationDetail'
-import { t } from '../../i18n'
+import { ConversationDetailSkeleton } from '../../components/conversations/ConversationDetail/ConversationDetailSkeleton'
 
 export default function ConversationPage() {
   const router = useRouter()
 
-  // The page is static: the id is only known once the router is ready
-  if (!router.isReady) return <p>{t('common.loading')}</p>
+  if (!router.isReady) return <ConversationDetailSkeleton />
 
   return <ConversationDetail conversationId={Number(router.query.id)} />
 }

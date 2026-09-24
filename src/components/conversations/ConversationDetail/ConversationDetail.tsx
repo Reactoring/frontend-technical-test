@@ -4,20 +4,33 @@ import { useTypedQuery } from '../../../hooks/useTypedQuery'
 import { t } from '../../../i18n'
 import { queries } from '../../../services/endpoints'
 import { getInterlocutorNickname } from '../../../utils/conversation'
+import { ErrorState } from '../../ui/ErrorState/ErrorState'
 import { ConversationHeader } from '../ConversationHeader/ConversationHeader'
 import { ConversationMessages } from '../ConversationMessages/ConversationMessages'
 import { MessageForm } from '../MessageForm/MessageForm'
+import { ConversationDetailSkeleton } from './ConversationDetailSkeleton'
 import styles from './ConversationDetail.module.css'
 
 export function ConversationDetail({ conversationId }: { conversationId: number }) {
   const userId = useLoggedUserId()
-  const { data, isPending, isError } = useTypedQuery(queries.conversations, { userId })
+  const { data, isPending, refetch } = useTypedQuery(queries.conversations, { userId })
 
-  if (isPending) return <p>{t('common.loading')}</p>
-  if (isError) return <p role="alert">{t('conversation.error')}</p>
+  if (isPending) return <ConversationDetailSkeleton />
+  // Not loading and no data: the request failed. If only a refresh fails, the cached data stays visible
+  if (!data) {
+    return (
+      <ErrorState
+        title={t('error.title')}
+        message={t('error.message')}
+        retryLabel={t('error.retry')}
+        onRetry={refetch}
+      />
+    )
+  }
 
-  // GET /conversation/:id is not usable (see README): the conversation is read from the user's list,
-  // so an invalid id or a conversation of another user is never opened
+  // The API can't return a single conversation (GET /conversation/:id always returns [], see README),
+  // so we look for it in the user's own list. This also acts as a guard: an unknown id or a conversation
+  // between other users is shown as "not found" and its messages are never requested
   const conversation = data.find(({ id }) => id === conversationId)
   if (!conversation) {
     return (
