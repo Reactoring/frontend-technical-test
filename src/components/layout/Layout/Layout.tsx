@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Logo from '../../../assets/lbc-logo.webp'
 import { t } from '../../../i18n'
+import { LoggedUser } from '../LoggedUser/LoggedUser'
 import styles from './Layout.module.css'
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -16,6 +17,9 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className={styles.header}>
         <Image src={Logo} alt="leboncoin" height={32} priority />
         <span className={styles.badge}>{t('app.title')}</span>
+        <div className={styles.user}>
+          <LoggedUser />
+        </div>
       </header>
 
       <main className={styles.main}>{children}</main>

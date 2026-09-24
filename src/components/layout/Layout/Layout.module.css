@@ -21,6 +21,12 @@
   font-weight: 600;
 }
 
+/* Pushed to the right of the header */
+.user {
+  min-width: 0;
+  margin-left: auto;
+}
+
 .main {
   max-width: 800px;
   margin: 0 auto;

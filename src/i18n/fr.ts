@@ -1,6 +1,7 @@
 export const fr = {
   'app.title': 'Messagerie',
   'app.description': 'Consultez et envoyez vos messages leboncoin',
+  'loggedUser.label': 'Connecté en tant que',
   'common.loading': 'Chargement…',
   'error.title': 'Le serveur fait une sieste',
   'error.message': "Ce n'est pas vous, c'est nous. Réessayez dans un instant.",
