@@ -12,9 +12,9 @@ const mockFetch = (response: Promise<Response>) => {
 
 describe('apiRequest', () => {
   it('should return the validated data', async () => {
-    mockFetch(Promise.resolve(Response.json({ id: 1, nickname: 'Thibaut' })))
+    mockFetch(Promise.resolve(Response.json({ id: 1, nickname: 'Elodie' })))
 
-    await expect(apiRequest('/user/1', { schema: userSchema })).resolves.toEqual({ id: 1, nickname: 'Thibaut' })
+    await expect(apiRequest('/user/1', { schema: userSchema })).resolves.toEqual({ id: 1, nickname: 'Elodie' })
     expect(global.fetch).toHaveBeenCalledWith(`${API_URL}/user/1`, expect.objectContaining({ method: 'GET' }))
   })
 

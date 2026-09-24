@@ -30,7 +30,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 
 ### Data layer
 
-All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas.
+All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas. The endpoints the app may call are declared once in `src/services/endpoints.ts` (path, method, zod input and output). Components use them through `useTypedQuery` / `useTypedMutation` (TanStack Query), so params and results are typed and mutation inputs are validated before being sent. The swagger is outdated (wrong types, missing fields), so this contract is written by hand and tested against `db.json` instead of being generated.
 
 ### Security
 

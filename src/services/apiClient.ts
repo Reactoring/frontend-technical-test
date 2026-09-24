@@ -1,6 +1,6 @@
 import type { ZodType } from 'zod'
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3005'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3005'
 
 const TIMEOUT_MS = 8000
 
