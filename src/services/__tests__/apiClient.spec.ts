@@ -21,7 +21,9 @@ describe('apiRequest', () => {
   it('should throw an ApiError with the status when the server fails', async () => {
     mockFetch(Promise.resolve(new Response(null, { status: 503 })))
 
-    await expect(apiRequest('/user/1', { schema: userSchema })).rejects.toEqual(expect.objectContaining({ status: 503 }))
+    await expect(apiRequest('/user/1', { schema: userSchema })).rejects.toEqual(
+      expect.objectContaining({ status: 503 }),
+    )
   })
 
   it('should throw an ApiError when the server is unreachable', async () => {

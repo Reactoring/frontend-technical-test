@@ -5,7 +5,10 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3005
 const TIMEOUT_MS = 8000
 
 export class ApiError extends Error {
-  constructor(message: string, readonly status?: number) {
+  constructor(
+    message: string,
+    readonly status?: number,
+  ) {
     super(message)
     this.name = 'ApiError'
   }
