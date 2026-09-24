@@ -1,11 +1,8 @@
-.back {
+.bubble {
   fill: var(--color-primary-soft);
 }
 
-.front {
+.mark {
   fill: var(--color-primary);
-}
-
-.dot {
-  fill: var(--color-surface);
+  font-weight: 700;
 }

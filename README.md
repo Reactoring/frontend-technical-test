@@ -44,6 +44,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 - Send a message (Enter to send, Shift + Enter for a new line), the field is kept if sending fails
 - Server errors: a friendly error screen with a retry button
 - Loading skeletons with the same layout as the content
+- A French 404 page, also shown for a conversation outside the user list
 
 ## Technical choices
 

@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { useLoggedUserId } from '../../../contexts/LoggedUserContext'
 import { useTypedQuery } from '../../../hooks/useTypedQuery'
 import { t } from '../../../i18n'
 import { queries } from '../../../services/endpoints'
 import { getInterlocutorNickname } from '../../../utils/conversation'
 import { ErrorState } from '../../ui/ErrorState/ErrorState'
+import { NotFoundState } from '../../ui/NotFoundState/NotFoundState'
 import { ConversationHeader } from '../ConversationHeader/ConversationHeader'
 import { ConversationMessages } from '../ConversationMessages/ConversationMessages'
 import { MessageForm } from '../MessageForm/MessageForm'
@@ -34,12 +34,12 @@ export function ConversationDetail({ conversationId }: { conversationId: number 
   const conversation = data.find(({ id }) => id === conversationId)
   if (!conversation) {
     return (
-      <p>
-        {t('conversation.notFound')}{' '}
-        <Link href="/" className={styles.link}>
-          {t('conversation.back')}
-        </Link>
-      </p>
+      <NotFoundState
+        title={t('conversation.notFound')}
+        message={t('conversation.notFoundMessage')}
+        backLabel={t('conversation.back')}
+        backHref="/"
+      />
     )
   }
 

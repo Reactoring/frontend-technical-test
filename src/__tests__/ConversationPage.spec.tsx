@@ -58,7 +58,7 @@ describe('Conversation page', () => {
 
     render(<ConversationPage />, { wrapper })
 
-    expect(await screen.findByText('Conversation introuvable.')).toBeInTheDocument()
+    expect(await screen.findByText('Conversation introuvable')).toBeInTheDocument()
     expect(apiRequestMock).toHaveBeenCalledTimes(1)
   })
 

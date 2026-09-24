@@ -15,8 +15,3 @@
   /* Lets the area shrink below its content instead of growing */
   min-height: 0;
 }
-
-.link {
-  color: var(--color-primary);
-  font-weight: 600;
-}
