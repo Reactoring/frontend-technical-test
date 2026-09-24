@@ -32,6 +32,10 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 
 All HTTP calls go through `src/services/apiClient.ts` (timeout and a typed `ApiError`). The API is not trusted: every response is validated with zod, and the types in `src/types` are inferred from these schemas. The endpoints the app may call are declared once in `src/services/endpoints.ts` (path, method, zod input and output). Components use them through `useTypedQuery` / `useTypedMutation` (TanStack Query), so params and results are typed and mutation inputs are validated before being sent. The swagger is outdated (wrong types, missing fields), so this contract is written by hand instead of being generated.
 
+### Logged user
+
+The logged user id is provided by a React context (`useLoggedUserId()`), so components and tests don't depend on a global constant. `getLoggedUserId()` stays the single source: plugging real authentication only means changing this function.
+
 ### Internationalisation
 
 The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a typed `t('key')` function (an unknown key is a compile error). Adding a language means adding a dictionary with the same keys.
