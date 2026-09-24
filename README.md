@@ -21,7 +21,15 @@ The API URL can be changed with `NEXT_PUBLIC_API_URL` (see `.env.example`).
 
 The CI runs format check, lint, typecheck and tests on every push and pull request.
 
+## Features
+
+- Conversation list, most recent first
+
 ## Technical choices
+
+### Rendering
+
+Kept the Pages Router provided by the boilerplate. Messaging is private and highly interactive, so data is fetched client-side: pages are static, and TanStack Query caching makes navigation instant. The App Router's Server Components would bring little here; migrating would be a separate step.
 
 ### Tooling
 
