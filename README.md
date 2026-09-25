@@ -1,5 +1,7 @@
 # Frontend technical test
 
+**[Open the live app](https://web-production-7e75e.up.railway.app)** · [Mock API](https://api-production-d3d2.up.railway.app/users) · Use the **Démo** button (bottom right) to switch user, cut the server or reset the data.
+
 ## AI-assisted development
 
 This test was developed with AI assistance, mainly to generate the code and the styling.
@@ -35,7 +37,13 @@ The API URL can be changed with `NEXT_PUBLIC_API_URL` (see `.env.example`).
 | `npm run typecheck` | TypeScript check (`tsc --noEmit`) |
 | `npm run format`    | Format the code with Prettier     |
 
-The CI runs format check, lint, typecheck and tests on every push and pull request.
+The CI runs format check, lint, typecheck, tests and build on every push and pull request.
+
+## Deployment
+
+Deployed on Railway, as two services built from this repository: the app and the mock API (links at the top).
+
+Every push to `main` redeploys both services once the CI is green (Railway "Wait for CI"). The mock database starts again from `db.json` on each deploy.
 
 ## Features
 
