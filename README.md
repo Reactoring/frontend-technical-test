@@ -43,7 +43,7 @@ The CI runs format check, lint, typecheck, tests and build on every push and pul
 
 Deployed on Railway, as two services built from this repository: the app and the mock API (links at the top).
 
-Every push to `main` redeploys both services once the CI is green (Railway "Wait for CI"). The mock database starts again from `db.json` on each deploy.
+Every push to `main` redeploys both services once the CI is green. The mock database starts again from `db.json` on each deploy.
 
 ## Features
 
@@ -65,7 +65,7 @@ Kept the Pages Router provided by the boilerplate. Messaging is private and high
 
 ### Tooling
 
-- **Type checking in CI**: `next build` ignores ESLint and tests don't check types, so a dedicated `typecheck` step catches type errors before they reach `main`.
+- **Type checking in CI**: a dedicated `typecheck` step catches type errors before they reach `main`.
 - **Prettier** formats the code (`npm run format`); ESLint only checks code quality (`eslint-config-prettier` disables the conflicting rules).
 
 ### Project structure
