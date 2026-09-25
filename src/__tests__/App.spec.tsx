@@ -51,6 +51,15 @@ describe('Conversations page', () => {
     expect(apiRequestMock).toHaveBeenCalledWith('/conversations/1', expect.anything())
   })
 
+  it('should load the messages when a conversation is hovered', async () => {
+    apiRequestMock.mockResolvedValueOnce(conversations).mockResolvedValueOnce([])
+
+    render(<Home />, { wrapper })
+    fireEvent.mouseEnter(await screen.findByRole('link', { name: /Patrick/ }))
+
+    expect(apiRequestMock).toHaveBeenLastCalledWith('/messages/2', expect.anything())
+  })
+
   it('should show a message when there is no conversation', async () => {
     apiRequestMock.mockResolvedValue([])
 

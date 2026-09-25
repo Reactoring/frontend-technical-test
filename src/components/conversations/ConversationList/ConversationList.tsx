@@ -9,9 +9,10 @@ import styles from './ConversationList.module.css'
 interface ConversationListProps {
   conversations: Conversation[]
   userId: User['id']
+  onConversationHover: (conversationId: number) => void
 }
 
-export function ConversationList({ conversations, userId }: ConversationListProps) {
+export function ConversationList({ conversations, userId, onConversationHover }: ConversationListProps) {
   const sortedConversations = sortByMostRecent(conversations)
 
   return (
@@ -21,7 +22,11 @@ export function ConversationList({ conversations, userId }: ConversationListProp
 
         return (
           <li key={conversation.id}>
-            <Link href={`/conversations/${conversation.id}`} className={styles.item}>
+            <Link
+              href={`/conversations/${conversation.id}`}
+              className={styles.item}
+              onMouseEnter={() => onConversationHover(conversation.id)}
+            >
               <Avatar nickname={nickname} />
               <span className={styles.text}>
                 <span className={styles.nickname}>{nickname}</span>

@@ -83,6 +83,13 @@ The logged user id is provided by a React context (`useLoggedUserId()`), so comp
 
 The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a typed `t('key', params)` function (an unknown key is a compile error, `{name}` placeholders are replaced by params). Adding a language means adding a dictionary with the same keys.
 
+### Performance
+
+- Static pages served instantly, data fetched client-side and cached by TanStack Query: going back to a page is instant.
+- Skeletons share the layout of the content, so nothing moves when data arrives.
+- No heavy dependency, logo loaded with `next/image` and `priority`.
+- The messages of a conversation are prefetched when it is hovered, so it opens without a loading state.
+
 ### Accessibility
 
 - One `h1` per page, including the error and not found screens, and a page title per screen ("Jeremie · Messagerie").

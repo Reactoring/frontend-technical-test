@@ -1,5 +1,6 @@
+import { noop, useQueryClient } from '@tanstack/react-query'
 import { useLoggedUserId } from '../../../contexts/LoggedUserContext'
-import { useTypedQuery } from '../../../hooks/useTypedQuery'
+import { getQueryOptions, useTypedQuery } from '../../../hooks/useTypedQuery'
 import { t } from '../../../i18n'
 import { queries } from '../../../services/endpoints'
 import { ErrorState } from '../../ui/ErrorState/ErrorState'
@@ -8,6 +9,7 @@ import { ConversationListSkeleton } from '../ConversationList/ConversationListSk
 
 export function UserConversations() {
   const userId = useLoggedUserId()
+  const queryClient = useQueryClient()
   const { data, isPending, refetch } = useTypedQuery(queries.conversations, { userId })
 
   if (isPending) return <ConversationListSkeleton />
@@ -24,5 +26,10 @@ export function UserConversations() {
   }
   if (data.length === 0) return <p>{t('conversations.empty')}</p>
 
-  return <ConversationList conversations={data} userId={userId} />
+  // Loads the messages as soon as a conversation is hovered, so it opens without waiting.
+  // Not reloaded on each hover for a few seconds
+  const prefetchMessages = (conversationId: number) =>
+    queryClient.query({ ...getQueryOptions(queries.messages, { conversationId }), staleTime: 20_000 }).catch(noop)
+
+  return <ConversationList conversations={data} userId={userId} onConversationHover={prefetchMessages} />
 }
