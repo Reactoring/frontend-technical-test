@@ -42,7 +42,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 - Conversation list, most recent first
 - Conversation messages, oldest first
 - Send a message (Enter to send, Shift + Enter for a new line), the field is kept if sending fails
-- Create a conversation: the + button opens a search with user suggestions (case and accent insensitive), an existing conversation is opened instead of creating a duplicate
+- Create a conversation: an existing conversation is opened instead of creating a duplicate
 - The logged user is shown in the header (only the avatar on small screens)
 - Server errors: a friendly error screen with a retry button
 - Loading skeletons with the same layout as the content

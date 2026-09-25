@@ -15,10 +15,12 @@ export function Layout({ children }: { children: ReactNode }) {
       </Head>
 
       <header className={styles.header}>
-        <Image src={Logo} alt="leboncoin" height={32} priority />
-        <span className={styles.badge}>{t('app.title')}</span>
-        <div className={styles.user}>
-          <LoggedUser />
+        <div className={styles.headerContent}>
+          <Image src={Logo} alt="leboncoin" height={32} priority />
+          <span className={styles.badge}>{t('app.title')}</span>
+          <div className={styles.user}>
+            <LoggedUser />
+          </div>
         </div>
       </header>
 
