@@ -47,6 +47,7 @@ The CI runs format check, lint, typecheck and tests on every push and pull reque
 - Server errors: a friendly error screen with a retry button
 - Loading skeletons with the same layout as the content
 - A French 404 page, also shown for a conversation outside the user list
+- A demo panel to test the app online (`NEXT_PUBLIC_DEMO=true`): log in as another user, cut the server for 20 seconds, reset the data
 
 ## Technical choices
 
@@ -107,3 +108,4 @@ The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a t
 
 - The mock server middleware read `db.json` once at startup, so created conversations never showed up: it now reads json-server's live database.
 - The json-server does not update `lastMessageTimestamp` when a message is sent, so the conversation date and order stay unchanged after sending.
+- The demo tools are public: any visitor can cut the server or reset the data, which is fine for a demo but not for a real app.

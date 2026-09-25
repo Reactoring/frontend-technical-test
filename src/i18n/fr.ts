@@ -26,5 +26,12 @@ export const fr = {
   'messageForm.label': 'Votre message',
   'messageForm.placeholder': 'Écrire un message…',
   'messageForm.send': 'Envoyer',
+  'demo.button': 'Démo',
+  'demo.title': 'Outils de test',
+  'demo.hint': "Pour essayer l'app en ligne.",
+  'demo.logInAs': 'Se connecter en tant que',
+  'demo.outage': 'Couper le serveur {seconds} s',
+  'demo.outageRunning': 'Serveur coupé… {seconds} s',
+  'demo.reset': 'Réinitialiser les données',
   'messageForm.error': "Votre message n'a pas pu être envoyé. Réessayez.",
 }

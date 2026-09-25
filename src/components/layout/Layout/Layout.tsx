@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Logo from '../../../assets/lbc-logo.webp'
 import { t } from '../../../i18n'
+import { DemoPanel } from '../../demo/DemoPanel/DemoPanel'
 import { LoggedUser } from '../LoggedUser/LoggedUser'
 import styles from './Layout.module.css'
 
@@ -25,6 +26,8 @@ export function Layout({ children }: { children: ReactNode }) {
       </header>
 
       <main className={styles.main}>{children}</main>
+
+      {process.env.NEXT_PUBLIC_DEMO === 'true' ? <DemoPanel /> : null}
     </>
   )
 }
