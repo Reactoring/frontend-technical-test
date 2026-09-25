@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "start-server": "json-server --watch src/server/db.json --routes src/server/routes.json --middlewares src/server/middleware/demo.js src/server/middleware/conversations.js --port 3005",
+    "start-server:prod": "json-server src/server/db.json --routes src/server/routes.json --middlewares src/server/middleware/demo.js src/server/middleware/conversations.js --host 0.0.0.0 --port $PORT",
     "test": "jest",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
