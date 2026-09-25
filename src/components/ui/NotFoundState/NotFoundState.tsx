@@ -11,6 +11,7 @@ interface NotFoundStateProps {
 export function NotFoundState({ title, message, backLabel, backHref }: NotFoundStateProps) {
   return (
     <StatusMessage
+      isPageTitle
       title={title}
       message={message}
       action={{ label: backLabel, href: backHref }}

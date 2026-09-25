@@ -1,5 +1,6 @@
 export const fr = {
   'app.title': 'Messagerie',
+  'app.pageTitle': '{name} · Messagerie',
   'app.description': 'Consultez et envoyez vos messages leboncoin',
   'loggedUser.label': 'Connecté en tant que',
   'common.loading': 'Chargement…',
@@ -19,6 +20,7 @@ export const fr = {
   'newConversation.close': 'Fermer la recherche',
   'newConversation.noResult': 'Aucun utilisateur trouvé',
   'newConversation.error': "La conversation n'a pas pu être créée. Réessayez.",
+  'messages.you': 'Vous',
   'messages.empty': "Aucun message pour l'instant",
   'messages.emptyHint': 'Envoyez le premier message à {name}.',
   'messageForm.label': 'Votre message',

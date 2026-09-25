@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useLoggedUserId } from '../../../contexts/LoggedUserContext'
 import { useTypedQuery } from '../../../hooks/useTypedQuery'
 import { t } from '../../../i18n'
@@ -24,6 +25,7 @@ export function ConversationDetail({ conversationId }: { conversationId: number 
         message={t('error.message')}
         retryLabel={t('error.retry')}
         onRetry={refetch}
+        isPageTitle
       />
     )
   }
@@ -47,6 +49,9 @@ export function ConversationDetail({ conversationId }: { conversationId: number 
 
   return (
     <div className={styles.detail}>
+      <Head>
+        <title>{t('app.pageTitle', { name: interlocutorNickname })}</title>
+      </Head>
       <ConversationHeader
         interlocutorNickname={interlocutorNickname}
         lastMessageTimestamp={conversation.lastMessageTimestamp}

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { t } from '../../../i18n'
 import type { Message } from '../../../types/message'
 import type { User } from '../../../types/user'
 import { sortByOldest } from '../../../utils/message'
@@ -27,7 +28,11 @@ export function MessageList({ messages, userId, interlocutorNickname }: MessageL
 
         return (
           <li key={message.id} className={isMine ? styles.mine : styles.theirs}>
-            {!isMine ? <span className={styles.author}>{interlocutorNickname}</span> : null}
+            {isMine ? (
+              <span className="visually-hidden">{t('messages.you')}</span>
+            ) : (
+              <span className={styles.author}>{interlocutorNickname}</span>
+            )}
             <p className={styles.bubble}>{message.body}</p>
           </li>
         )

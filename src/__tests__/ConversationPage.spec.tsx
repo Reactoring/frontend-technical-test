@@ -48,7 +48,7 @@ describe('Conversation page', () => {
     expect(await screen.findByRole('heading', { name: 'Jeremie' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Retour à mes conversations' })).toHaveAttribute('href', '/')
     const items = await screen.findAllByRole('listitem')
-    expect(items.map((item) => item.textContent)).toEqual(['Bonjour Jeremie', 'JeremieSalut Elodie'])
+    expect(items.map((item) => item.textContent)).toEqual(['VousBonjour Jeremie', 'JeremieSalut Elodie'])
     expect(apiRequestMock).toHaveBeenLastCalledWith('/messages/1', expect.anything())
   })
 

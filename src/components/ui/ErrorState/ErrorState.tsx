@@ -6,12 +6,14 @@ interface ErrorStateProps {
   message: string
   retryLabel: string
   onRetry: () => unknown
+  isPageTitle?: boolean
 }
 
-export function ErrorState({ title, message, retryLabel, onRetry }: ErrorStateProps) {
+export function ErrorState({ title, message, retryLabel, onRetry, isPageTitle }: ErrorStateProps) {
   return (
     <StatusMessage
       role="alert"
+      isPageTitle={isPageTitle}
       title={title}
       message={message}
       action={{ label: retryLabel, onClick: onRetry }}

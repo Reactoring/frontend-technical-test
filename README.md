@@ -83,6 +83,13 @@ The logged user id is provided by a React context (`useLoggedUserId()`), so comp
 
 The interface is in French. Texts live in `src/i18n/fr.ts` and are read with a typed `t('key', params)` function (an unknown key is a compile error, `{name}` placeholders are replaced by params). Adding a language means adding a dictionary with the same keys.
 
+### Accessibility
+
+- One `h1` per page, including the error and not found screens, and a page title per screen ("Jeremie · Messagerie").
+- Labelled fields and icon buttons, hidden text for screen readers ("Vous" before my messages, the logged user).
+- Errors are announced (`role="alert"`), and so is loading.
+- Checked with axe: no violations.
+
 ### Security
 
 `next@15.2.2` had known vulnerabilities, including a critical one ([CVE-2025-29927](https://github.com/advisories/GHSA-f82v-jwr5-mffw)). Upgraded to the latest 15.x, removed the redundant `sharp` dependency and overrode the `postcss` version bundled by Next: `npm audit` goes from 26 vulnerabilities to 0. Next 16 is a major version and would need its own validated migration.

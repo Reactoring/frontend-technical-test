@@ -10,14 +10,18 @@ interface StatusMessageProps {
   message: string
   action?: Action
   role?: 'alert'
+  // When the message replaces the whole page, its title is the page heading
+  isPageTitle?: boolean
 }
 
 // Illustrated message shared by the empty, error and not found states
-export function StatusMessage({ illustration, title, message, action, role }: StatusMessageProps) {
+export function StatusMessage({ illustration, title, message, action, role, isPageTitle = false }: StatusMessageProps) {
+  const Title = isPageTitle ? 'h1' : 'p'
+
   return (
     <div className={styles.status} role={role}>
       {illustration}
-      <p className={styles.title}>{title}</p>
+      <Title className={styles.title}>{title}</Title>
       <p className={styles.message}>{message}</p>
       {action && 'href' in action ? (
         <Link href={action.href} className={styles.action}>
